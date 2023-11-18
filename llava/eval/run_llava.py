@@ -55,7 +55,7 @@ def eval_model(args, tokenizer=None, model=None, image_processor=None, context_l
     model_name = get_model_name_from_path(args.model_path)
     if tokenizer is None or model is None or image_processor is None:
         tokenizer, model, image_processor, context_len = load_pretrained_model(
-            args.model_path, args.model_base, model_name, load_4bit=True
+            args.model_path, args.model_base, model_name
         )
 
     qs = args.query
