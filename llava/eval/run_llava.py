@@ -48,14 +48,15 @@ def load_images(image_files):
     return out
 
 
-def eval_model(args):
+def eval_model(args, tokenizer=None, model=None, image_processor=None, context_len=None):
     # Model
     disable_torch_init()
 
-    model_name = get_model_name_from_path(args.model_path)
-    tokenizer, model, image_processor, context_len = load_pretrained_model(
-        args.model_path, args.model_base, model_name, load_4bit=True
-    )
+    if tokenizer is None or model is None or image_processor is None:
+        model_name = get_model_name_from_path(args.model_path)
+        tokenizer, model, image_processor, context_len = load_pretrained_model(
+            args.model_path, args.model_base, model_name, load_4bit=True
+        )
 
     qs = args.query
     image_token_se = DEFAULT_IM_START_TOKEN + DEFAULT_IMAGE_TOKEN + DEFAULT_IM_END_TOKEN
